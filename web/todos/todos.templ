@@ -1,0 +1,26 @@
+{% package todos %}
+
+{% import "fmt" %}
+
+{% templ TodosComponent(todos []Todo) %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{%= "Name" %}</th>
+                <th>{%= "Date" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for _, p := range todos %}
+                {%! TodoComponent(p) %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endtempl %}
+
+{% templ TodoComponent(todo Todo) %}
+    <tr id={%= fmt.Sprintf("post-%d", todo.ID) %}>
+        <th>{%= todo.Name %}</th>
+        <th>{%= todo.Date %}</th>
+    </tr>
+{% endtempl %}
